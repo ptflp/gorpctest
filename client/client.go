@@ -6,8 +6,6 @@ import (
 	"net/rpc"
 	"net/rpc/jsonrpc"
 	"strconv"
-
-	"github.com/cirocosta/sample-rpc-go/core"
 )
 
 // Client contains the configuration options for
