@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	. "github.com/ptflp/gorpctest/server"
 	"log"
 	"os"
 	"os/signal"
@@ -13,6 +14,7 @@ var (
 	isServer    = flag.Bool("server", false, "activates server mode")
 	useJson     = flag.Bool("json", false, "whether it should use json-rpc")
 	serverSleep = flag.Duration("server.sleep", 0, "time for the server to sleep on requests")
+	useHttp     = flag.Bool("http", false, "whether it should use HTTP")
 )
 
 func handleSignals() {
@@ -33,7 +35,7 @@ func must(err error) {
 
 func runServer() {
 	server := &Server{
-		UseHttp: *http,
+		UseHttp: *useHttp,
 		UseJson: *useJson,
 		Sleep:   *serverSleep,
 		Port:    *port,
