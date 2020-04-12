@@ -3,6 +3,7 @@ package client
 import (
 	"context"
 	"errors"
+	"github.com/ptflp/gorpctest/common"
 	"net/rpc"
 	"net/rpc/jsonrpc"
 	"strconv"
@@ -72,7 +73,7 @@ func (c *Client) Close() (err error) {
 	return
 }
 
-// Executes the only handler that we want to execute (`core.Handler`).
+// Executes the only handler that we want to execute (`common.Handler`).
 //
 // Given that `net/rpc` has been freezed and is not taking more
 // features, it didn't get a `context` nativelly, which is sad.
@@ -82,11 +83,11 @@ func (c *Client) Close() (err error) {
 // enforcement and the other cancellation features.
 func (c *Client) Execute(ctx context.Context, name string) (msg string, err error) {
 	var (
-		request  = &core.Request{Name: name}
-		response = new(core.Response)
+		request  = &common.Request{Name: name}
+		response = new(common.Response)
 	)
 
-	err = c.client.Call(core.HandlerName, request, response)
+	err = c.client.Call(common.HandlerName, request, response)
 	if err != nil {
 		return
 	}

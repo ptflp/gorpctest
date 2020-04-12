@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	. "github.com/ptflp/gorpctest/client"
 	. "github.com/ptflp/gorpctest/server"
 	"log"
 	"os"
@@ -55,8 +56,8 @@ func runServer() {
 
 func runClient() {
 	client := &Client{
-		UseHttp: *http,
-		useJson: *useJson,
+		UseHttp: *useHttp,
+		UseJson: *useJson,
 		Port:    *port,
 	}
 	defer client.Close()
